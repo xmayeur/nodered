@@ -1,0 +1,36 @@
+<script type="text/javascript">
+    RED.nodes.registerType('comp',{
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""},
+			threshold: {value: "0"},
+			hysteresis: {value: "0"}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "comp.png",
+        label: function() {
+            return this.name||"comp";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="comp">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+	 <div class="form-row">
+     <label for="node-input-threshold"><i class="icon-tag"></i> Prefix</label>
+     <input type="text" id="node-input-threshold">
+	</div>
+	 <div class="form-row">
+     <label for="node-input-hysteresis"><i class="icon-tag"></i> Prefix</label>
+     <input type="text" id="node-input-hysteresis">
+	</div>
+</script>
+
+<script type="text/x-red" data-help-name="comp">
+    <p>A simple node that compare the message payloads against a threshold with hysteresis</p>
+</script>

@@ -1,0 +1,10 @@
+{
+    "name" : "node-red-contrib-comp",
+	"version" : "0.0.1",
+	"description" : "A hysteresis comparator node",
+    "node-red" : {
+        "nodes": {
+            "comp": "comp.js"
+        }
+    }
+}
