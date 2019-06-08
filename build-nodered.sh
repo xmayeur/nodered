@@ -17,5 +17,5 @@ docker run -it -p 1880:1880 \
     --name nodered8 \
     --dns 8.8.8.8 \
     --net host \
-    nodered
+    nodered8
 #    -e FLOWS=flows.json \

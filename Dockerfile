@@ -1,4 +1,4 @@
-FROM nodered/node-red-docker:v8
+FROM nodered/node-red-docker:rpi-v8
 
 # RUN npm install -g npm 
 
@@ -10,6 +10,6 @@ RUN npm install node-red-node-smooth \
        node-red-dashboard telldus-live mqtt \
        node-red-contrib-threshold deep-diff
 
-RUN  npm audit fix
+# RUN  npm audit fix
 
 # COPY ./flows.json /data

@@ -1,9 +1,8 @@
-docker rm -f nodered
-docker build -t nodered .
+docker rm -f nodered8
 docker run -it -p 1880:1880 \
-    -v /home/xavier/Desktop/nodered/node-red-data:/data \
-    --name nodered \
+    -v /root/nodered/node-red-data:/data \
+    --name nodered8 \
     --dns 8.8.8.8 \
     --net host \
-    nodered
+    nodered8
 #    -e FLOWS=flows.json \
