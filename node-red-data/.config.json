@@ -813,7 +813,8 @@
      "view-node-status": true,
      "view-show-tips": true,
      "view-snap-grid": true,
-     "view-show-grid": true
+     "view-show-grid": true,
+     "view-node-show-label": true
     }
    },
    "menu-menu-item-sidebar": true
