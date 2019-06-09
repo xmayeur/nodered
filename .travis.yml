@@ -26,6 +26,8 @@ before_install:
 deploy:
   provider: script
   skip_cleanup: true
+  script: ssh -o "StrictHostKeyChecking=no" -t root@home.mayeur.be -p 2202 echo "New nodered8 image available" >> /root/msg.txt
+
 dd:
   secure: dB6apP/8rgH3rgSspKtqjeg6XRWJ68k9vnVunPRClW8N7x3O1onpMROLLc+Spy2nd+cEL/aJmBRYbKYWDBSC/ivzp2VxXTAi3oka8zFREndOXrzVC77bOI/0Vtu7qsmqaINEiZpKwLnZiG1GFMYlxXmTl31u69DhQDOBdgBq9Eonm1T6LOhgOxY6cXSBcu0WroQtyEa4CdehOfOEmYw+ReoriIUfC+IY1k/dppBN+Y2tt2L2Ui5XvNLYHM09ES+cTTLTD8B7bOatFj5+BRejWZ7L0EdxxqyRiQ4cEZ0WXkRzYUDS9DlpseAopZtOLV1GISJOAxCHHFLEf1sFrvh259k1o4HRHd7gGbyTehoidjuwOa+o9kfBDgODYLqFmtfxwOZWhvZVGoDvdIp/eovrOq59Kj8iIDM2vAHe0tMCM9HyzPSzURbUdRRzI2ykGuPi3S7vKX4UiOfz4AARKKVcaIRzkZgNrz6I75MZ2R5tu7iPET+w+IaMiVTBFqz/8ajvqfBb8QeFra6FAziZJekG+QbO2jnSKKV6EEbIB30sqYdRRG6zGxkpgZriEBBLpRHLncmAPtVuDVCudjJuK4VRUxOASbl0HZnGLaRdAocsDbaTDUplF697b+iLnwn0Wwz8RwtRJAjdqdxEMd818rnU6A0r+SNyJhdY8lrUX4SgvUQ=
 env:
