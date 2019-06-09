@@ -13,6 +13,7 @@ script:
     docker tag "$CONTAINER" xmayeur/"$CONTAINER"
     docker push xmayeur/"$CONTAINER"
   fi
+
 addons:
   ssh_known_hosts: home.mayeur.be
 
@@ -28,8 +29,6 @@ deploy:
   skip_cleanup: true
   script: ssh -o "StrictHostKeyChecking=no" -t root@home.mayeur.be -p 2202 echo "New nodered8 image available" >> /root/msg.txt
 
-dd:
-  secure: dB6apP/8rgH3rgSspKtqjeg6XRWJ68k9vnVunPRClW8N7x3O1onpMROLLc+Spy2nd+cEL/aJmBRYbKYWDBSC/ivzp2VxXTAi3oka8zFREndOXrzVC77bOI/0Vtu7qsmqaINEiZpKwLnZiG1GFMYlxXmTl31u69DhQDOBdgBq9Eonm1T6LOhgOxY6cXSBcu0WroQtyEa4CdehOfOEmYw+ReoriIUfC+IY1k/dppBN+Y2tt2L2Ui5XvNLYHM09ES+cTTLTD8B7bOatFj5+BRejWZ7L0EdxxqyRiQ4cEZ0WXkRzYUDS9DlpseAopZtOLV1GISJOAxCHHFLEf1sFrvh259k1o4HRHd7gGbyTehoidjuwOa+o9kfBDgODYLqFmtfxwOZWhvZVGoDvdIp/eovrOq59Kj8iIDM2vAHe0tMCM9HyzPSzURbUdRRzI2ykGuPi3S7vKX4UiOfz4AARKKVcaIRzkZgNrz6I75MZ2R5tu7iPET+w+IaMiVTBFqz/8ajvqfBb8QeFra6FAziZJekG+QbO2jnSKKV6EEbIB30sqYdRRG6zGxkpgZriEBBLpRHLncmAPtVuDVCudjJuK4VRUxOASbl0HZnGLaRdAocsDbaTDUplF697b+iLnwn0Wwz8RwtRJAjdqdxEMd818rnU6A0r+SNyJhdY8lrUX4SgvUQ=
 env:
   global:
   - secure: QRcILkBgC6+pzsqjhtxXR0EFw09QOM8UnjTBLzp3mLzv4jV98dttSctyL54SuUj11wnk+vlIEnUY8R63cWXdiMLQSpwpFDokV/Jx7e6MLNOjY2o0t0xJ89ACw7tnGjPFhu4+N7Metbvg3vmPBCbU9L8xgeCuJFJ5ybk3+juM+E/L38kvtz1zl6qXTfk1KdxOx1WMmXcQIpskvsa0mQKPkpgSx9dJ7uk0iPdyS8LEOFFxDlwtNzUQUwPG//dVBbmQkJcx78PYwjk23M8AogT27lfkOKddRuihBKsQrf8RAlrQmxvmc+77jawAnW40TVLBdeNfVUca/UEYiJbIi5sKF8ay5/ZVau857n8YQ/ImqUZfX+3LIf8HTSXnGiAOtK1XuRRuKZvfV1EepNEVWxMqxXeT8Pc8G7AhfYvuDfMoRrA0DwpEMRDyl7pzPPYJFv6+rAGkjGej4jbW1M9eyyLPd8BU2pFmY+BlKWES9w6gknEOcxbz4I1PocyKREBJtz7n2JslK6vSfZcsqrvx0a4H9mn9gQ1zmAYqMjCnRXAQDalFIO+14Sj9KHVmb8DsNCwyugyLmoxmWB3fXq2JlJs38BMi9KwuA1Inmbqop6CICisSDWEmsEkgvn+WGrKjilPhLve1ku3pjqwdJXMjQSW/Z0rRKg51fV5AXzgzWuDcVbA=
