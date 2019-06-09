@@ -1,6 +1,6 @@
-language: python
-python:
-- '3.6'
+language: node_js
+# node_js:
+# - '3.6'
 sudo: required
 services:
 - docker
@@ -13,7 +13,7 @@ script:
     echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
     # TAG=$(grep "ENV MYSQL_VERSION" Dockerfile | awk 'NF>1{print $NF}')
     docker tag "$CONTAINER" xmayeur/"$CONTAINER"
-    docker push xmayeur/"CONTAINER"
+    docker push xmayeur/"$CONTAINER"
   fi
 addons:
   ssh_known_hosts: home.mayeur.be
