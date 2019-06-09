@@ -27,7 +27,7 @@ before_install:
 deploy:
   provider: script
   skip_cleanup: true
-  script: ssh -o "StrictHostKeyChecking=no" -t root@home.mayeur.be -p 2202 echo "New nodered8 image available" >> /root/msg.txt
+  script: ssh -o "StrictHostKeyChecking=no" -t root@home.mayeur.be -p 2202 echo "New nodered8 image available"
 
 env:
   global:
