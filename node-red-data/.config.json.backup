@@ -817,7 +817,9 @@
      "view-node-show-label": true
     }
    },
-   "menu-menu-item-sidebar": true
+   "menu-menu-item-sidebar": true,
+   "menu-deploymenu-item-node": true,
+   "menu-deploymenu-item-full": false
   }
  }
 }
