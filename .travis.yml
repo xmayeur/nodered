@@ -1,0 +1,35 @@
+language: node_js
+sudo: required
+services:
+- docker
+script:
+- docker run --rm --privileged multiarch/qemu-user-static:register --reset
+- docker build -t "$CONTAINER" .
+- |-
+  if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+    # TAG=$(grep "ENV MYSQL_VERSION" Dockerfile | awk 'NF>1{print $NF}')
+    docker tag "$CONTAINER" xmayeur/"$CONTAINER"
+    docker push xmayeur/"$CONTAINER"
+  fi
+
+addons:
+  ssh_known_hosts: home.mayeur.be
+
+before_install:
+- openssl aes-256-cbc -K $encrypted_5bdd8329a64c_key -iv $encrypted_5bdd8329a64c_iv
+  -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+- eval "$(ssh-agent -s)"
+- chmod 600 /tmp/deploy_rsa
+- ssh-add /tmp/deploy_rsa
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: ssh -o "StrictHostKeyChecking=no" -t root@home.mayeur.be -p 2202 docker-compose restart "$CONTAINER"
+
+env:
+  global:
+  - secure: QRcILkBgC6+pzsqjhtxXR0EFw09QOM8UnjTBLzp3mLzv4jV98dttSctyL54SuUj11wnk+vlIEnUY8R63cWXdiMLQSpwpFDokV/Jx7e6MLNOjY2o0t0xJ89ACw7tnGjPFhu4+N7Metbvg3vmPBCbU9L8xgeCuJFJ5ybk3+juM+E/L38kvtz1zl6qXTfk1KdxOx1WMmXcQIpskvsa0mQKPkpgSx9dJ7uk0iPdyS8LEOFFxDlwtNzUQUwPG//dVBbmQkJcx78PYwjk23M8AogT27lfkOKddRuihBKsQrf8RAlrQmxvmc+77jawAnW40TVLBdeNfVUca/UEYiJbIi5sKF8ay5/ZVau857n8YQ/ImqUZfX+3LIf8HTSXnGiAOtK1XuRRuKZvfV1EepNEVWxMqxXeT8Pc8G7AhfYvuDfMoRrA0DwpEMRDyl7pzPPYJFv6+rAGkjGej4jbW1M9eyyLPd8BU2pFmY+BlKWES9w6gknEOcxbz4I1PocyKREBJtz7n2JslK6vSfZcsqrvx0a4H9mn9gQ1zmAYqMjCnRXAQDalFIO+14Sj9KHVmb8DsNCwyugyLmoxmWB3fXq2JlJs38BMi9KwuA1Inmbqop6CICisSDWEmsEkgvn+WGrKjilPhLve1ku3pjqwdJXMjQSW/Z0rRKg51fV5AXzgzWuDcVbA=
+  - secure: UVKRKG2lsTk3ZxGSWZbCEG2uYVBy9lw2Cm3F5eOdevO/87+mNm6OixPihlCk1yX8fG9ASjhFEGXLqf5ixmvrNgki5dL4UYjN9NN7NhV0X4OR6Evp3uOmfWGWH7j0E9V4GztHmaihiMdd5rMOxFmkPlMa5Ia/lyEv7lTdcIOGbMTXteXHIjshT9Qzv0b6ce7epqEl/AhCP71afe2a5C4wvJH+3jzLE2yXZM58k5+1oQ+ivsm0EuOlTHU1Pzi1P7d5SoXzwZwLm/gFJtemLGxAEM5yI6TD1GOEk07WFsEKAXKeMQQaEB/bzm5Ilh8oNglIQOQfLcaCwb/cIqF8JGW4lGWTjo/mxAQzJjE2JPsnmn3KiL2BHtmWJgqQmBYZ4syXpKyBuPR//LYFLNF0rvGzl6adKIwiT8gD1//EeuoRKf63XHRPYYFAMZs+4m7YN3Cj1pRaWbSm4JVqz/Ezj+TF2RunCkJrHOlSvdfC3JN3EdAEeAagjb+7K6qGKcdhTpSYQRkhF2lRpj9wCa4gmV95eR9iEOnGiSw3MnQWvZTpKBARopfWoe2IszuEyYxutro9OojmvlTznkZ0hoe2N8w9yBJ6U+F5tXvjnnH15QCG/QsRVQmKcAnUQJx8UYyCfQ9QOnVCdxRaccow1uKTJCmxz0j/7zUX3G/96u+nUlXLf/E=
+  - secure: VR95yhwxdHaJYGVvAkObPYwZCG28Z5WPz7WgikpqS17C5Sykt/jALlaXdtaCeDXWyKVZMZ9nR2UVEo1KLFA1uomsFdIAjNibKLtJ1y3wdpoW7TlWmczEFDl4poua1Et5Yzol6jq1vMp48Q0eKC+xGhMDNPSFRZ/KUm+af2YAF2HBRi7fE8iXQhS1ucioVAuxhF2etZ/IQ2oOs7hqGA8RpQwtHbCSojoP5uDF5DjRSyDcx6jWnPOp7l9IS90PQC0EifS2mECCQR06ZMaFzcreulJFzRwsvthanv4/a18TO04SS3GPwVyNQINoTLoUKmwFjcn/fbwrU0xpTwq3f2gV4eNf9hi7s8BEaRJvx5TUvQPeoT6GOkxB0R/2gLzCfsEhah5vIISKwSKCP6CwaJ2L7ns5iz0/CdT9QMUG/cTKy++B/vsZ2fMhZMYxf7QAy0lFmShwNUwF5uOMs38qJ0cFPbOt5tb1uphIV8i/Z0HeSmGgyZXCFsfESQRHeNovk7KRxaZuAyiJ/m0mKYRiYo5owFW0SCXonCD9MQ2MyQ+Ky2T0j6Na9uZhIs+H91RnCxrx+0wHIzdGulwYGWhLEqz45Kv3c1+7+IldePbrjG0COkBwyay3V9x5PDxlwx/lA4k5oRmesqGTKKfe8z3tC5Wts0J0V+JtK/CnzibxdSBUfYY=
