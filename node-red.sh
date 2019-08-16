@@ -4,5 +4,6 @@ docker run -it -p 1880:1880 \
     --name nodered8 \
     --dns 8.8.8.8 \
     --net host \
+    --user root \
     xmayeur/nodered8
 #    -e FLOWS=flows.json \
