@@ -65,7 +65,7 @@ module.exports = {
 
     // To enabled pretty-printing of the flow within the flow file, set the following
     //  property to true:
-    //flowFilePretty: true,
+    flowFilePretty: true,
 
     // By default, credentials are encrypted in storage using a generated key. To
     // specify your own secret, set the following property.
@@ -149,7 +149,7 @@ module.exports = {
     // The following property can be used to disable the editor. The admin API
     // is not affected by this option. To disable both the editor and the admin
     // API, use either the httpRoot or httpAdminRoot properties
-    //disableEditor: false,
+    disableEditor: true,
 
     // The following property can be used to configure cross-origin resource sharing
     // in the HTTP nodes.
@@ -204,9 +204,9 @@ module.exports = {
     //    context.global.os
 
     functionGlobalContext: {
-	mqtt:require('mqtt'),
-	telldusLive:require('telldus-live'),
-        diff:require('deep-diff')
+	mqtt:require('mqtt') // ,
+//	telldusLive:require('telldus-live'),
+//        diff:require('deep-diff')
         // os:require('os'),
         // jfive:require("johnny-five"),
         // j5board:require("johnny-five").Board({repl:false})
