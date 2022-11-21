@@ -14,10 +14,10 @@
 //
 
 // Define Telldus Live API credentials
-var publicKey    = 'FEHUVEW84RAFR5SP22RABURUPHAFRUNU' ;
-var privateKey   = 'ZUXEVEGA9USTAZEWRETHAQUBUR69U6EF' ;
-var token        = '8a53e30b756ff293e222bbf2a975d28b050b7d0ef' ;
-var tokenSecret  = 'b44fa3992f8b978a061c2df4777d8986' ;
+var publicKey = flow.get('publicKey');
+var privateKey = flow.get('privateKey') ;
+var token = flow.get('token');
+var tokenSecret = flow.get('tokenSecret');
 var cloud  ;
 
 
